@@ -1,6 +1,7 @@
 
 import express from "express";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 import Tesseract from "tesseract.js";
 
 const router = express.Router();
@@ -11,16 +12,13 @@ router.post("/result", async (req, res) => {
 
     // Launch browser
 
-    const browser = await puppeteer.launch({
-  headless: true,
-  args: [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-dev-shm-usage",
-    "--single-process",
-    "--no-zygote"
-  ],
-});
+      const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),  // 👈 works in Render
+      headless: chromium.headless,
+    });
+
 
     // const browser = await puppeteer.launch({ headless: false,slowMo:70,})
     const page = await browser.newPage();

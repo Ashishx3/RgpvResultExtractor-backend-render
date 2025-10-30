@@ -1,7 +1,7 @@
 
 import express from "express";
-import puppeteer from "puppeteer";
-import puppeteerCore from "puppeteer-core";
+// import puppeteer from "puppeteer";  use for local uncomment 
+import puppeteer from "puppeteer-core"; // when local change peuoppeter to core  add Core 
 import chromium from "@sparticuz/chromium";
 import Tesseract from "tesseract.js";
 
@@ -13,28 +13,28 @@ router.post("/result", async (req, res) => {
 
 
     // Launch browser
- const isLocal = process.env.NODE_ENV !== "production";
+//  const isLocal = process.env.NODE_ENV !== "production";
 
-    const browser = await (isLocal
-      ? puppeteer.launch({
-          headless: false, // ✅ visualize in local
-          slowMo: 60,
-        })
-      : puppeteerCore.launch({
-          args: chromium.args,
-          defaultViewport: chromium.defaultViewport,
-          executablePath: await chromium.executablePath(),
-          headless: chromium.headless,
-        }));
+//     const browser = await (isLocal
+//       ? puppeteer.launch({
+//           headless: false, // ✅ visualize in local
+//           slowMo: 60,
+//         })
+//       : puppeteerCore.launch({
+//           args: chromium.args,
+//           defaultViewport: chromium.defaultViewport,
+//           executablePath: await chromium.executablePath(),
+//           headless: chromium.headless,
+//         }));
 
 
 //kaam kar gya tha production mei 
-    //   const browser = await puppeteer.launch({
-    //   args: chromium.args,
-    //   defaultViewport: chromium.defaultViewport,
-    //   executablePath: await chromium.executablePath(),  // 👈 works in Render
-    //   headless: chromium.headless,
-    // });
+      const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),  // 👈 works in Render
+      headless: chromium.headless,
+    });
 
 
     // const browser = await puppeteer.launch({ headless: false,slowMo:70,})

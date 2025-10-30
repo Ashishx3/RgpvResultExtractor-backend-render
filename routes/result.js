@@ -10,7 +10,10 @@ router.post("/result", async (req, res) => {
     const { enrollmentNo, branch, semester } = req.body;
 
     // Launch browser
-    const browser = await puppeteer.launch({ headless: false,slowMo:70, });
+    const browser = await puppeteer.launch({ headless: false,slowMo:70,args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      executablePath:
+        process.env.PUPPETEER_EXECUTABLE_PATH ||
+        "/usr/bin/google-chrome-stable", });
     const page = await browser.newPage();
 
     // Open the main page

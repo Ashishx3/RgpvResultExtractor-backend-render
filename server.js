@@ -7,7 +7,13 @@ app.use(cors());
 app.use(express.json());
 
 // Use the result route
+
 app.use("/api", resultRouter);
+
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`✅ Backend running on http://localhost:${PORT}`));

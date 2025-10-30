@@ -12,7 +12,7 @@ app.use("/api", resultRouter);
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Contact the dev>>')
 })
 
 const PORT = 5000;
